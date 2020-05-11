@@ -1,0 +1,18 @@
+#container{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    max-width: 999999px !important;
+}
+#main{
+    position: absolute;
+    /* width: 100%; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#res{
+    /* width: 0%;
+    height: 0%; */
+    background: aliceblue;
+}

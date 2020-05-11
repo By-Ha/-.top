@@ -1,0 +1,58 @@
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/universe.css" /> 
+</head>
+<body ondrag="return false;">
+    <script src="js/func.js"></script>
+    <p>可以用@来at一个人</br>表情列表</br>/xyx  斜眼笑</br>/xk!  笑哭</br>/jk!  惊恐</br>/kk!  快哭了</p>
+    <div>
+        选择对象:
+        <div class="select">
+            <select id="select">
+                <option value ="ZC">ZC</option>
+                <option value ="XSC">XSC</option>
+                <option value="DY">DY</option>
+                <option value="ZYM">ZYM</option>
+                <option value="QX">QX</option>
+                <option value="HTW">HTW</option>
+                <option value="LQ">LQ</option>
+                <option value="CHX">CHX</option>
+                <option value="RSX">RSX</option>
+                <option value="XXY">XXY</option>
+                <option value="ZHJ">ZHJ</option>
+                <option value="ZLX">ZLX</option>
+                <option value="ZZH">ZZH</option>
+                <option value="XYL">XYL</option>
+                <option value="LZK">LZK</option>
+                <option value="WCM">WCM</option>
+                <option value="KS">KS</option>
+            </select>
+        </div>
+        内容：
+        <input id="input" type="input">
+        自定义头像(QQ号获取):
+        <input id="QQid" type="input">
+        自定义昵称:
+        <input id="QQname" type="input">
+        <button onclick="confirm()">确认</button>
+    </div>
+    <br>
+    <div id="FakeQQ">
+        <img src="img/ZC.jpg" class="avatar">
+        <span style="height: 100px; position: fixed; margin-left: 12px;">
+            <div style="height: 55%"><p id="name">【老师】数学-🐍老师</p></div>
+            <div style="height: 100% ;display: inline-flex; padding-top: 5px;">
+                <img src="img/left.png" style="height: 100%;">
+                <span id="content">作业太少了,我都写完了</span>
+                <img src="img/right.png" style="height: 100%;">
+            </div>
+        </span>
+    </div>
+    <script>
+        // document.ondragstart = function() {return false;}
+        // document.oncontextmenu = function() {return false;}
+        // document.onselectstart = function() {return false;}
+    </script>
+</body>

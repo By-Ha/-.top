@@ -1,0 +1,29 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>欢迎使用自助式资料转换系统</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap-sweetalert/1.0.1/sweetalert.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap-sweetalert/1.0.1/sweetalert.min.js"></script>
+    <script src="https://cdn.bootcss.com/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <link href="index.css" rel="stylesheet">
+    <script src="index.js"></script>
+</head>
+<body>
+    <div id="container" class="container">
+        <div id="main">
+            <div class="form-group">
+                <label for="name">源数据</label>
+                </br>
+                <textarea id="name" placeholder="请输入数据" style="width: 200px;"></textarea>
+            </div>
+            <button type="button" class="btn btn-warning" id="submit">提交</button>
+            <button type="button" class="btn btn-success" id="copy" data-clipboard-target="#res">点击复制</button>
+            <pre id="res"></pre>
+        </div>
+        
+    </div>
+</body>
+</html>
