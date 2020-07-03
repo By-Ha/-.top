@@ -96,7 +96,7 @@
                         let min = delta % 60;
                         delta = Math.floor(delta / 60);
                         let hrs = delta;
-                        document.getElementById("timer").innerHTML = `${hrs}:${formatZero(min, 2)}:${formatZero(s, 2)}:${formatZero(ms, 2)}`;
+                        document.getElementById("timer").innerHTML = `${hrs}:${formatZero(min, 2)}:${formatZero(s, 2)}.${formatZero(ms, 2)}`;
                     }, 10);
                 } else {
                     $(".start").removeClass('btn-warning');
@@ -112,7 +112,7 @@
                 $(".start").addClass('btn-primary');
                 $(".start").html('开始');
                 startTime = 0;
-                document.getElementById("timer").innerHTML = "0:00:00:00";
+                document.getElementById("timer").innerHTML = "0:00:00.00";
                 clearInterval(timer);
                 timer = undefined;
             })
