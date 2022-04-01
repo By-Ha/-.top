@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>随机罗马音平假名片假名</title>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container center">
+    <h1 class="display-1 center">
+      <a class="romaji">随机罗马音平假名片假名</a>
+      <a class="gana"></a>
+      <a class="kana"></a>
+    </h1>
+    <h1 class="display-2 center" id="timer"></h1>
+    <div class="btn-group btn-group-lg">
+      <button id="romaji" type="button" class="btn btn-primary">生成罗马音</button>
+      <button id="gana" type="button" class="btn btn-primary">生成平假名</button>
+      <button id="kana" type="button" class="btn btn-primary">生成片假名</button>
+      <button id="show" type="button" class="btn btn-success">点击显示全部</button>
+      <button id="showtype" type="button" class="btn btn-success">默认显示部分</button>
+      <button id="sound" type="button" class="btn btn-success">播音</button>
+      <button id="btx" type="button" class="btn btn-info">听写</button>
+    </div>
+    <br />
+    <br />
+    <input id="type" type="text" class="form-control" placeholder="组别(普通A,浊音B,拗音C),全选ABC"
+      style="width: 400px;margin: 0 auto;">
+  </div>
+  <style>
+    @font-face {
+      font-family: 'webfont';
+      font-display: swap;
+      src: url('//at.alicdn.com/t/webfont_w7q6n7zqvx.eot');
+      /* IE9*/
+      src: url('//at.alicdn.com/t/webfont_w7q6n7zqvx.eot?#iefix') format('embedded-opentype'),
+        /* IE6-IE8 */
+        url('//at.alicdn.com/t/webfont_w7q6n7zqvx.woff2') format('woff2'),
+        url('//at.alicdn.com/t/webfont_w7q6n7zqvx.woff') format('woff'),
+        /* chrome、firefox */
+        url('//at.alicdn.com/t/webfont_w7q6n7zqvx.ttf') format('truetype'),
+        /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+        url('//at.alicdn.com/t/webfont_w7q6n7zqvx.svg#Alibaba-PuHuiTi-Regular') format('svg');
+      /* iOS 4.1- */
+    }
+
+    #timer {
+      font-family: 'webfont';
+    }
+
+    h1.center {
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn {
+      transition: all 0.5s linear;
+    }
+
+    .container {
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .center {
+      text-align: center;
+    }
+  </style>
+  <script>
+    const raw =
+      `ア あ:a
+イ い:i
+ウ う:u
+エ え:e
+オ お:o
+カ か:ka
+キ き:ki
+ク く:ku
+ケ け:ke
+コ こ:ko
+サ さ:sa
+シ し:si
+ス す:su
+セ せ:se
+ソ そ:so
+タ た:ta
+チ ち:ti
+ツ つ:tu
+テ て:te
+ト と:to
+ナ な:na
+ニ に:ni
+ヌ ぬ:nu
+ネ ね:ne
+ノ の:no
+ハ は:ha
+ヒ ひ:hi
+フ ふ:fu
+ヘ へ:he
+ホ ほ:ho
+マ ま:ma
+ミ み:mi
+ム む:mu
+メ め:me
+モ も:mo
+ヤ や:ya
+ユ ゆ:yu
+ヨ よ:yo
+ラ ら:ra
+リ り:ri
+ル る:ru
+レ れ:re
+ロ ろ:ro
+ワ わ:wa
+ヲ を:wo
+ン ん:n
+ガ が:ga
+ギ ぎ:gi
+グ ぐ:gu
+ゲ げ:ge
+ゴ ご:go
+ザ ざ:za
+ジ じ:zi
+ズ ず:zu
+ゼ ぜ:ze
+ゾ ぞ:zo
+ダ だ:da
+ヂ ぢ:di
+ヅ づ:du
+デ で:de
+ド ど:do
+バ ば:ba
+ビ び:bi
+ブ ぶ:bu
+ベ べ:be
+ボ ぼ:bo
+パ ぱ:pa
+ピ ぴ:pi
+プ ぷ:pu
+ペ ぺ:pe
+ポ ぽ:po
+キャ きゃ:kya
+キュ きゅ:kyu
+キョ きょ:kyo
+ギャ ぎゃ:gya
+ギュ ぎゅ:gyu
+ギョ ぎょ:gyo
+シャ じゃ:sya
+シュ じゅ:syu
+ショ じょ:syo
+ジア じゃ:ja
+ジュ じゅ:ju
+ジョ じょ:jo
+チャ ちゃ:tya
+チュ ちゅ:tyu
+チョ ちょ:tyo
+ジャ じゃ:zya
+ぢゃ じゃ:dya
+ぢゅ じゅ:dyu
+ぢょ じょ:dyo
+にゃ にゅ:nya
+にゅ にゅ:nyu
+にょ にょ:nyo
+ヒャ ひゃ:hya
+ヒュ ひゅ:hyu
+ヒョ ひょ:hyo
+ビャ びゃ:bya
+ビュ びゅ:byu
+ビョ びょ:byo
+ピャ ぴゃ:pya
+ピュ ぴゅ:pyu
+ピョ ぴょ:pyo
+ミャ みゃ:mya
+ミュ みゅ:myu
+ミョ みょ:myo
+リャ りゃ:rya
+リュ りゅ:ryu
+リョ りょ:ryo`;
+    const data = [];
+    raw.split('\n').forEach(line => {
+      const [kana, romaji] = line.split(':');
+      data.push({
+        gana: kana.split(' ')[1],
+        kana: kana.split(' ')[0],
+        romaji
+      });
+    });
+    const getType = (romaji) => {
+      if (romaji.indexOf('y') !== -1) return 'C';
+      else if (!!romaji.match(/[gzdbp]/)) return 'B';
+      return 'A';
+    }
+    const getRandom = (type) => {
+      const index = Math.floor(Math.random() * data.length);
+      return type.indexOf(getType(data[index].romaji)) !== -1 ? data[index] : getRandom(type);
+    };
+    let after = () => { };
+    (() => {
+      $("#romaji").click(() => {
+        let type = $("#type").val();
+        if (!type.match(/[ABC]/)) {
+          type = 'ABC';
+        }
+        const data = getRandom(type);
+        $(".gana").css('visibility', 'hidden');
+        $(".kana").css('visibility', 'hidden');
+        $(".romaji").css('visibility', 'hidden');
+        $(".gana").text(data.gana);
+        $(".kana").text(data.kana);
+        $(".romaji").text(data.romaji);
+        $(".romaji").css('visibility', 'visible');
+        after();
+      });
+      $("#gana").click(() => {
+        let type = $("#type").val();
+        if (!type.match(/[ABC]/)) {
+          type = 'ABC';
+        }
+        const data = getRandom(type);
+        $(".gana").css('visibility', 'hidden');
+        $(".kana").css('visibility', 'hidden');
+        $(".romaji").css('visibility', 'hidden');
+        $(".gana").text(data.gana);
+        $(".kana").text(data.kana);
+        $(".romaji").text(data.romaji);
+        $(".gana").css('visibility', 'visible');
+        after();
+      });
+      $("#kana").click(() => {
+        let type = $("#type").val();
+        if (!type.match(/[ABC]/)) {
+          type = 'ABC';
+        }
+        const data = getRandom(type);
+        $(".gana").css('visibility', 'hidden');
+        $(".kana").css('visibility', 'hidden');
+        $(".romaji").css('visibility', 'hidden');
+        $(".gana").text(data.gana);
+        $(".kana").text(data.kana);
+        $(".romaji").text(data.romaji);
+        $(".kana").css('visibility', 'visible');
+        after();
+      });
+      $("#show").click(() => {
+        $(".gana").css('visibility', 'visible');
+        $(".kana").css('visibility', 'visible');
+        $(".romaji").css('visibility', 'visible');
+      });
+      $("#showtype").click(() => {
+        if ($("#showtype").text() !== '默认显示全部') {
+          after = () => {
+            $(".gana").css('visibility', 'visible');
+            $(".kana").css('visibility', 'visible');
+            $(".romaji").css('visibility', 'visible');
+          }
+          $("#showtype").text('默认显示全部');
+          $("#showtype").removeClass('btn-success');
+          $("#showtype").addClass('btn-warning');
+          $("#show").css('display', 'none');
+          $("#romaji").text('生成');
+          $("#kana").css('display', 'none');
+          $("#gana").css('display', 'none');
+        } else {
+          after = () => { }
+          $("#showtype").text('默认显示部分');
+          $("#showtype").addClass('btn-success');
+          $("#showtype").removeClass('btn-warning');
+          $("#show").css('display', 'unset');
+          $("#romaji").text('生成罗马音');
+          $("#kana").css('display', 'unset');
+          $("#gana").css('display', 'unset');
+        }
+      });
+      $("#sound").click(() => {
+        const base = 'https://res.hjfile.cn/pt/m/jp/50yin/audio/$.mp3';
+        const audio = new Audio(base.replace('$', $(".gana").text()));
+        audio.play();
+      });
+      $("#btx").click(() => {
+        $("#romaji").click();
+        $(".gana").css('visibility', 'hidden');
+        $(".kana").css('visibility', 'hidden');
+        $(".romaji").css('visibility', 'hidden');
+        $("#sound").click();
+      });
+    })();
+  </script>
+</body>
+
+</html>
